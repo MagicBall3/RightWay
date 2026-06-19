@@ -1,0 +1,51 @@
+name: Build RightWay APK
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+
+    steps:
+    - name: Checkout Actions
+      uses: actions/checkout@v3
+
+    - name: Get Date
+      id: get-date
+      run: |
+        echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+
+    - name: Cache Buildozer Options
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.buildozer
+          .buildozer
+        key: ${{ runner.os }}-buildozer-${{ steps.get-date.outputs.date }}
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-state: '3.10'
+
+    - name: Install Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libsqlite3-dev lldb lld bzip2 libbz2-dev libssl-dev libgdbm-dev libgdbm-compat-dev liblzma-dev libreadline-dev uuid-dev libffi-dev tk-dev textinfo
+        pip install --upgrade pip
+        pip install Cython==0.29.33 buildozer
+
+    - name: Build APK with Buildozer
+      run: |
+        buildozer android debug
+      env:
+        ACCEPT_SDK_LICENSE_NET: y
+
+    - name: Upload APK Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: RightWay-APK
+        path: bin/*.apk
