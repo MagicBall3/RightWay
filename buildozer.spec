@@ -18,7 +18,6 @@ source.dir = .
 source.include_exts = py,png,jpg,jpeg,ttf,wav,mp3,json,spec
 
 # (list) Application requirements
-# Добавляем sqlite3 на случай работы с базой данных
 requirements = python3,pygame,sqlite3
 
 # (str) Icon of the application
@@ -39,13 +38,7 @@ android.api = 33
 # (int) Minimum API your APK will support.
 android.minapi = 21
 
-# (int) Android SDK version to use
-android.sdk = 33
-
-# (str) Android NDK version to use
-android.ndk = 25b
-
-# Жестко прописываем стабильную версию инструментов, чтобы сборщик не путался в логах
+# Позволяем билддозеру самому выбрать стабильные SDK/NDK из системы
 android.skip_update = False
 android.accept_sdk_license = True
 
