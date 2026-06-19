@@ -2,8 +2,12 @@
 # (string) Title of your application
 title = RightWay
 
+# (string) Version of the application
+version = 1.0
+
 # (string) Package name
 package.name = rightway
+
 
 # (string) Package domain (needed for android app id)
 package.domain = org.zrqcorp
