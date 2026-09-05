@@ -18,7 +18,7 @@ source.dir = .
 source.include_exts = py,png,jpg,jpeg,ttf,wav,mp3,json,spec
 
 # (list) Application requirements
-requirements = python3,pygame,sqlite3
+requirements = python3==3.10.12,hostpython3==3.10.12,pygame,sqlite3
 
 # (str) Icon of the application
 icon.filename = %(source.dir)s/icon.png
